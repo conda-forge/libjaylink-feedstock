@@ -1,6 +1,6 @@
 context:
   name: libjaylink
-  version: "0.4.0"
+  version: "0.5.0"
   build_num: 1
   so_version: "0.2.1"
   major_so_version: "0"
@@ -11,7 +11,7 @@ package:
 
 source:
   url: https://gitlab.zapb.de/libjaylink/libjaylink/-/archive/${{ version }}/libjaylink-${{ version }}.tar.gz
-  sha256: 5557d623934a4bbc053c11f9a181375d7abeb76af910696d9e3d9b1de3bf6987
+  sha256: 235b12d161b29d813026704f335536a6a916646ea2058302e4ca45ca2cd81325
   patches:
     - if: win
       then:
@@ -29,7 +29,7 @@ source:
         - patches/fix-uninitialized.patch
 
 build:
-  number: ${{ build_num }}
+  number: 0
 
 requirements:
   build:
