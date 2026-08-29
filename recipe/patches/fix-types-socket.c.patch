@@ -1,29 +1,83 @@
 --- a/libjaylink/socket.c
 +++ b/libjaylink/socket.c
-@@ -67,1 +67,1 @@
+@@ -47,13 +47,13 @@
+ 	if (!socket_set_blocking(sock, false))
+ 		return JAYLINK_ERR;
+ #ifdef _WIN32
 -	ret = connect(sock, address, address_length);
 +	ret = connect(sock, address, (int)address_length);
-@@ -84,1 +84,1 @@
+
+ 	if (ret != 0 && WSAGetLastError() != WSAEWOULDBLOCK)
+ 		return JAYLINK_ERR;
+ #else
+ 	errno = 0;
+-	ret = connect(sock, address, address_length);
++	ret = connect(sock, address, (int)address_length);
+
+ 	if (ret != 0 && errno != EINPROGRESS)
+ 		return JAYLINK_ERR;
+@@ -69,7 +69,7 @@
+ 	FD_SET(sock, &fds);
+ #endif
+
 -	tv.tv_sec = timeout / 1000;
 +	tv.tv_sec = (long)(timeout / 1000);
-@@ -143,1 +143,1 @@
+ 	tv.tv_usec = (timeout % 1000) * 1000;
+
+ 	ret = select(sock + 1, NULL, &fds, NULL, &tv);
+@@ -128,7 +128,7 @@
+ {
+ 	int ret;
+
 -	ret = bind(sock, address, length);
 +	ret = bind(sock, address, (int)length);
-@@ -174,1 +174,1 @@
+
+ #ifdef _WIN32
+ 	if (ret == SOCKET_ERROR)
+@@ -159,7 +159,7 @@
+ {
+ 	ssize_t ret;
+
 -	ret = send(sock, buffer, *length, flags);
 +	ret = send(sock, buffer, (int)*length, flags);
-@@ -206,1 +206,1 @@
+ #ifdef _WIN32
+ 	if (ret == SOCKET_ERROR)
+ 		return false;
+@@ -191,7 +191,7 @@
+ {
+ 	ssize_t ret;
+
 -	ret = recv(sock, buffer, *length, flags);
 +	ret = recv(sock, buffer, (int)*length, flags);
-@@ -243,1 +243,1 @@
+
+ #ifdef _WIN32
+ 	if (ret == SOCKET_ERROR)
+@@ -228,7 +228,7 @@
+ {
+ 	ssize_t ret;
+
 -	ret = sendto(sock, buffer, *length, flags, address, address_length);
 +	ret = sendto(sock, buffer, (int)*length, flags, address, (int)address_length);
-@@ -287,1 +287,1 @@
+
+ #ifdef _WIN32
+ 	if (ret == SOCKET_ERROR)
+@@ -272,8 +272,8 @@
+ #ifdef _WIN32
+ 	int tmp;
+
 -	tmp = *address_length;
-+	tmp = (int)*address_length;
-@@ -288,1 +288,1 @@
 -	ret = recvfrom(sock, buffer, *length, flags, address, &tmp);
++	tmp = (int)*address_length;
 +	ret = recvfrom(sock, buffer, (int)*length, flags, address, &tmp);
-@@ -342,1 +342,1 @@
+
+ 	if (ret == SOCKET_ERROR)
+ 		return false;
+@@ -327,7 +327,7 @@
+ JAYLINK_PRIV bool socket_set_option(int sock, int level, int option,
+ 		const void *value, size_t length)
+ {
 -	if (!setsockopt(sock, level, option, value, length))
 +	if (!setsockopt(sock, level, option, value, (int)length))
+ 		return true;
+
+ 	return false;
