@@ -1,14 +1,38 @@
 --- a/libjaylink/fileio.c
 +++ b/libjaylink/fileio.c
-@@ -117,1 +117,1 @@
+@@ -97,7 +97,7 @@
+ 	buf[1] = FILE_IO_CMD_READ;
+ 	buf[2] = 0x00;
+
 -	buf[3] = filename_length;
 +	buf[3] = (uint8_t)filename_length;
-@@ -252,1 +252,1 @@
+ 	buf[4] = FILE_IO_PARAM_FILENAME;
+ 	memcpy(buf + 5, filename, filename_length);
+
+@@ -232,7 +232,7 @@
+ 	buf[1] = FILE_IO_CMD_WRITE;
+ 	buf[2] = 0x00;
+
 -	buf[3] = filename_length;
 +	buf[3] = (uint8_t)filename_length;
-@@ -371,1 +371,1 @@
+ 	buf[4] = FILE_IO_PARAM_FILENAME;
+ 	memcpy(buf + 5, filename, filename_length);
+
+@@ -351,7 +351,7 @@
+ 	buf[1] = FILE_IO_CMD_GET_SIZE;
+ 	buf[2] = 0x00;
+
 -	buf[3] = length;
 +	buf[3] = (uint8_t)length;
-@@ -463,1 +463,1 @@
+ 	buf[4] = FILE_IO_PARAM_FILENAME;
+ 	memcpy(buf + 5, filename, length);
+
+@@ -443,7 +443,7 @@
+ 	buf[1] = FILE_IO_CMD_DELETE;
+ 	buf[2] = 0x00;
+
 -	buf[3] = length;
 +	buf[3] = (uint8_t)length;
+ 	buf[4] = FILE_IO_PARAM_FILENAME;
+ 	memcpy(buf + 5, filename, length);
+

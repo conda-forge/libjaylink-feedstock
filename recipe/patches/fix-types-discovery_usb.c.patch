@@ -1,5 +1,11 @@
 --- a/libjaylink/discovery_usb.c
 +++ b/libjaylink/discovery_usb.c
-@@ -268,1 +268,1 @@
+@@ -337,7 +337,7 @@
+ 		return JAYLINK_ERR_IO;
+ 	} else if (ret < 0) {
+ 		log_err(ctx, "Failed to retrieve device list: %s",
 -			libusb_error_name(ret));
 +			libusb_error_name((int)ret));
+ 		return JAYLINK_ERR;
+ 	}
+

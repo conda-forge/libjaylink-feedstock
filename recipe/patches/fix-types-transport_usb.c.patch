@@ -1,5 +1,11 @@
 --- a/libjaylink/transport_usb.c
 +++ b/libjaylink/transport_usb.c
-@@ -412,1 +412,1 @@
+@@ -392,7 +392,7 @@
+ 	while (tries > 0 && length > 0) {
+ 		/* Send data in chunks of CHUNK_SIZE bytes to the device. */
+ 		ret = libusb_bulk_transfer(devh->usb_devh, devh->endpoint_out,
 -			(unsigned char *)buffer, MIN(CHUNK_SIZE, length),
-+			(unsigned char *)buffer, MIN(CHUNK_SIZE, (int)length),
++			(unsigned char *)buffer, (int)MIN(CHUNK_SIZE, length),
+ 			&transferred, USB_TIMEOUT);
+
+ 		if (ret == LIBUSB_SUCCESS) {
