@@ -1,5 +1,11 @@
 --- a/libjaylink/discovery_tcp.c
 +++ b/libjaylink/discovery_tcp.c
-@@ -243,1 +243,1 @@
+@@ -224,7 +224,7 @@
+ 	size_t length;
+ 	size_t num_devs;
+
 -	sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 +	sock = (int)socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+ 	if (sock < 0) {
+ 		log_err(ctx, "Failed to create discovery socket");

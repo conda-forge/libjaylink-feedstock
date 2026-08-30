@@ -1,5 +1,11 @@
 --- a/libjaylink/transport_tcp.c
 +++ b/libjaylink/transport_tcp.c
-@@ -267,1 +267,1 @@
+@@ -247,7 +247,7 @@
+ 	sock = -1;
+
+ 	for (struct addrinfo *rp = info; rp != NULL; rp = rp->ai_next) {
 -		sock = socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
 +		sock = (int)socket(rp->ai_family, rp->ai_socktype, rp->ai_protocol);
+
+ 		if (sock < 0)
+ 			continue;
